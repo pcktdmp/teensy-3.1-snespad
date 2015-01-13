@@ -1,2 +1,15 @@
-# teensy-3.1-snespad
-Convert your SNES controller to USB gamepad with Teensy 3.1
+/*
+
+This program is free software; you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITSNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License along with this program. If not, see http://www.gnu.org/licenses/.
+
+*/
+
+Convert your SNES controller to USB Gamepad with Teensy 3.1
+
+Follow the physical wireing tutorial from: http://www.instructables.com/id/SNES-Teensy-USBPS3-Gamepad/
+
+Import this library in your Arduino IDE: https://code.google.com/p/nespad/source/browse/trunk/SNESpad
