@@ -1,7 +1,4 @@
-#include <SNESpad.h>
-
 /*
-
   snespad-31
 
   Copyright (C) 2014  Serge van Namen <serge@se-cured.org>
@@ -19,6 +16,8 @@
   You should have received a copy of the GNU Lesser General Public License
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
+
+#include <SNESpad.h>
 
 // Marco's for button states.
 #define BUTTON_PRESSED(state, btn) ((state) & (btn)) 
