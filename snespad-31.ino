@@ -19,7 +19,7 @@
 
 #include <SNESpad.h>
 
-// Marco's for button states.
+// Macro's for button states.
 #define BUTTON_PRESSED(state, btn) ((state) & (btn)) 
 #define CURRENTLY_PRESSED(btn) BUTTON_PRESSED(state, btn)
 #define PREVIOUSLY_PRESSED(btn) BUTTON_PRESSED(prev_state, btn) 
@@ -47,7 +47,7 @@
 #define BUTTON_L 5
 #define BUTTON_R 6
 
-// here be the latch, data and clock
+// here be the latch, data and clock,
 // be sure your soldering is correct.
 SNESpad controller = SNESpad(1,0,2);
 
@@ -65,6 +65,7 @@ void loop() {
   // by default the Joystick.{button,hat} call 
   // directly sends the button presses to the OS,
   // this is not what we want.
+  
   Joystick.useManualSend(true);
   
   state = controller.buttons();
@@ -173,7 +174,6 @@ void loop() {
       Joystick.send_now();
       
     }
-
 
   }
 
