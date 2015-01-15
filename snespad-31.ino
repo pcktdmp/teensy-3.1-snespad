@@ -211,16 +211,6 @@ void loop() {
     Joystick.button(BUTTON_R, 0);
   }
   
-  if (CURRENTLY_PRESSED(SNES_L) && CURRENTLY_PRESSED(SNES_R) && CURRENTLY_PRESSED(SNES_SELECT)) {
-
-    Joystick.button(BUTTON_START, 1);
-
-  }
-  else if (PREVIOUSLY_PRESSED(SNES_L) && PREVIOUSLY_PRESSED(SNES_R) && PREVIOUSLY_PRESSED(SNES_SELECT)) {
-
-    Joystick.button(BUTTON_START, 0);
-
-  } 
   
   // keep a previous state to simulate button release.
   prev_state = state;
