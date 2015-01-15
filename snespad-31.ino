@@ -19,16 +19,26 @@
 
 #include <SNESpad.h>
 
-// Macro's for button states.
+// Marco's for button states.
 #define BUTTON_PRESSED(state, btn) ((state) & (btn)) 
 #define CURRENTLY_PRESSED(btn) BUTTON_PRESSED(state, btn)
 #define PREVIOUSLY_PRESSED(btn) BUTTON_PRESSED(prev_state, btn) 
 
+#define DEBUGGING 1
+
+// debugging
+#ifdef DEBUGGING
+#define DEBUG(...) Serial.println(state, BIN) 
+#else 
+#define DEBUG(...)
+#endif
+ 
 // Generic Joystick/Gamepad mapping for the SNES buttons.
 #define BUTTON_A 3
 #define BUTTON_B 2
 #define BUTTON_Y 1
 #define BUTTON_X 4
+
 
 #define BUTTON_UP 0
 #define BUTTON_RIGHT 90
@@ -47,7 +57,7 @@
 #define BUTTON_L 5
 #define BUTTON_R 6
 
-// here be the latch, data and clock,
+// here be the latch, data and clock
 // be sure your soldering is correct.
 SNESpad controller = SNESpad(1,0,2);
 
@@ -55,62 +65,56 @@ int state = 0;
 int prev_state = 0;
 
 void setup() {
-
+#ifdef DEBUGGING
   Serial.begin(9600);
-
+#endif
 }
+
 
 void loop() {
   
   // by default the Joystick.{button,hat} call 
   // directly sends the button presses to the OS,
   // this is not what we want.
-  
   Joystick.useManualSend(true);
   
   state = controller.buttons();
-
+  
+  DEBUG();
+  
   if (CURRENTLY_PRESSED(SNES_A)){
 
-    Serial.println("I'm pressing A");
     Joystick.button(BUTTON_A, 1);
 
   }
   else if (PREVIOUSLY_PRESSED(SNES_A)) {
-    Serial.println("A released");
     Joystick.button(BUTTON_A, 0);
   }
 
   if (CURRENTLY_PRESSED(SNES_B)){
 
-    Serial.println("I'm pressing B");
     Joystick.button(BUTTON_B, 1);
 
   }
   else if (PREVIOUSLY_PRESSED(SNES_B)) {
-    Serial.println("B released");
     Joystick.button(BUTTON_B, 0);
   }
 
   if (CURRENTLY_PRESSED(SNES_Y)){
 
-    Serial.println("I'm pressing Y");
     Joystick.button(BUTTON_Y, 1);
 
   }
   else if (PREVIOUSLY_PRESSED(SNES_Y)) {
-    Serial.println("Y released");
     Joystick.button(BUTTON_Y, 0);
   }
 
   if (CURRENTLY_PRESSED(SNES_X)){
 
-    Serial.println("I'm pressing X");
     Joystick.button(BUTTON_X, 1);
 
   }
   else if (PREVIOUSLY_PRESSED(SNES_X)) {
-    Serial.println("X released");
     Joystick.button(BUTTON_X, 0);
   }
 
@@ -122,22 +126,18 @@ void loop() {
 
   if (CURRENTLY_PRESSED(SNES_UP) && CURRENTLY_PRESSED(SNES_RIGHT)) {
     
-   Serial.println("I'm pressing UP_RIGHT"); 
    Joystick.hat(BUTTON_UP_RIGHT);
   
   }else if (CURRENTLY_PRESSED(SNES_UP) && CURRENTLY_PRESSED(SNES_LEFT)) {
   
-   Serial.println("I'm pressing UP_LEFT"); 
    Joystick.hat(BUTTON_UP_LEFT);
   
   }else if (CURRENTLY_PRESSED(SNES_DOWN) && CURRENTLY_PRESSED(SNES_LEFT)) {
   
-   Serial.println("I'm pressing DOWN_LEFT"); 
    Joystick.hat(BUTTON_DOWN_LEFT);
    
   }else if (CURRENTLY_PRESSED(SNES_DOWN) && CURRENTLY_PRESSED(SNES_RIGHT)) {
   
-   Serial.println("I'm pressing DOWN_RIGHT"); 
    Joystick.hat(BUTTON_DOWN_RIGHT);
   
   // No directional combinations are pressed in this state,
@@ -147,7 +147,6 @@ void loop() {
    
     if (CURRENTLY_PRESSED(SNES_UP)){
 
-      Serial.println("I'm pressing UP");
       Joystick.hat(BUTTON_UP);
       Joystick.send_now();
       
@@ -155,21 +154,18 @@ void loop() {
     
     if (CURRENTLY_PRESSED(SNES_DOWN)){
 
-    Serial.println("I'm pressing DOWN");
     Joystick.hat(BUTTON_DOWN);
 
     }
   
    if (CURRENTLY_PRESSED(SNES_LEFT)){
   
-      Serial.println("I'm pressing LEFT");
       Joystick.hat(BUTTON_LEFT);
   
     }
   
     if (CURRENTLY_PRESSED(SNES_RIGHT)){
   
-      Serial.println("I'm pressing RIGHT");
       Joystick.hat(BUTTON_RIGHT);
       Joystick.send_now();
       
@@ -179,47 +175,52 @@ void loop() {
 
   if (CURRENTLY_PRESSED(SNES_START)){
 
-    Serial.println("I'm pressing START");
     Joystick.button(BUTTON_START, 1);
 
   }
   else if (PREVIOUSLY_PRESSED(SNES_START)) {
-    Serial.println("START released");
+    
     Joystick.button(BUTTON_START, 0);
+    
   }
 
   if (CURRENTLY_PRESSED(SNES_SELECT)){
 
-    Serial.println("I'm pressing SELECT");
     Joystick.button(BUTTON_SELECT, 1);
 
   }
   else if (PREVIOUSLY_PRESSED(SNES_SELECT)) {
-    Serial.println("SELECT released");
     Joystick.button(BUTTON_SELECT, 0);
   }
 
   if (CURRENTLY_PRESSED(SNES_L)){
 
-    Serial.println("I'm pressing L");
     Joystick.button(BUTTON_L, 1);
 
   }
   else if (PREVIOUSLY_PRESSED(SNES_L)) {
-    Serial.println("L released");
     Joystick.button(BUTTON_L, 0);
   }
 
   if (CURRENTLY_PRESSED(SNES_R)){
 
-    Serial.println("I'm pressing R");
     Joystick.button(BUTTON_R, 1);
 
   }
   else if (PREVIOUSLY_PRESSED(SNES_R)) {
-    Serial.println("R released");
     Joystick.button(BUTTON_R, 0);
   }
+  
+  if (CURRENTLY_PRESSED(SNES_L) && CURRENTLY_PRESSED(SNES_R) && CURRENTLY_PRESSED(SNES_SELECT)) {
+
+    Joystick.button(BUTTON_START, 1);
+
+  }
+  else if (PREVIOUSLY_PRESSED(SNES_L) && PREVIOUSLY_PRESSED(SNES_R) && PREVIOUSLY_PRESSED(SNES_SELECT)) {
+
+    Joystick.button(BUTTON_START, 0);
+
+  } 
   
   // keep a previous state to simulate button release.
   prev_state = state;
@@ -227,12 +228,11 @@ void loop() {
   if (!(CURRENTLY_PRESSED(SNES_LEFT) || CURRENTLY_PRESSED(SNES_RIGHT) || CURRENTLY_PRESSED(SNES_UP) || CURRENTLY_PRESSED(SNES_DOWN))) {
     
      Joystick.hat(BUTTON_PAD_UNPRESSED);
-     Serial.println("RESET DPAD");
   }
   
-  Joystick.send_now();
-  Serial.println("State sent.");
   
+  Joystick.send_now();
+ 
   delay(5);
 
 }
