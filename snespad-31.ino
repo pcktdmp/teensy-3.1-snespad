@@ -80,7 +80,7 @@ void loop() {
   
   state = controller.buttons();
   
-  DEBUG();
+  //DEBUG();
   
   if (CURRENTLY_PRESSED(SNES_A)){
 
@@ -223,6 +223,4 @@ void loop() {
   
   Joystick.send_now();
  
-  delay(5);
-
 }
