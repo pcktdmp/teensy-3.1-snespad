@@ -19,7 +19,7 @@
 
 #include <SNESpad.h>
 
-// Marco's for button states.
+// Macro's for button states.
 #define BUTTON_PRESSED(state, btn) ((state) & (btn)) 
 #define CURRENTLY_PRESSED(btn) BUTTON_PRESSED(state, btn)
 #define PREVIOUSLY_PRESSED(btn) BUTTON_PRESSED(prev_state, btn) 
@@ -148,13 +148,12 @@ void loop() {
     if (CURRENTLY_PRESSED(SNES_UP)){
 
       Joystick.hat(BUTTON_UP);
-      Joystick.send_now();
       
     }
     
     if (CURRENTLY_PRESSED(SNES_DOWN)){
 
-    Joystick.hat(BUTTON_DOWN);
+      Joystick.hat(BUTTON_DOWN);
 
     }
   
@@ -167,7 +166,6 @@ void loop() {
     if (CURRENTLY_PRESSED(SNES_RIGHT)){
   
       Joystick.hat(BUTTON_RIGHT);
-      Joystick.send_now();
       
     }
 
