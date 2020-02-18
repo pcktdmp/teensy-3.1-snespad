@@ -1,4 +1,4 @@
-### Some docs
+### Teensy 3.1 SNESPAD
 
 Convert your SNES controller to USB Gamepad with Teensy 3.1
 
